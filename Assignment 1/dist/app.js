@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const logic_1 = require("./logic");
 const app = (0, express_1.default)();
-const port = 8000;
+const port = 8005;
 // 1. Split words API
 app.get('/split/:datatype', (req, res) => {
     const inputString = req.params.datatype;

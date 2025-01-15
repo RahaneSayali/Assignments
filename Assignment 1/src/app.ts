@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { splitWords, concatenateWords, isLeapYear, secretHandshake } from './logic';
 
 const app = express();
-const port = 8000;
+const port = 8005;
 
 // 1. Split words API
 app.get('/split/:datatype', (req: Request, res: Response) => {
