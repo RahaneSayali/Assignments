@@ -5,7 +5,7 @@ function arrayFunctions(req, res) {
     const inputArray = req.body.array;
     // Check if the provided data is an array
     if (!Array.isArray(inputArray)) {
-        return res.status(400).json({ error: 'Payload must be an array of numbers' });
+        res.status(400).json({ error: 'Payload must be an array of numbers' });
     }
     // Concat
     const concatResult = inputArray.concat([7, 8, 9]);
@@ -55,8 +55,7 @@ function arrayFunctions(req, res) {
     const includesResult = inputArray.includes(5); // Checks if 5 is in the array
     // 21. IndexOf
     const indexOfResult = inputArray.indexOf(2); // Finds the index of the first occurrence of 2
-    // Return the result of all array functions
-    return {
+    res.json({
         originalArray: inputArray,
         concatResult,
         lastIndexOfResult,
@@ -79,5 +78,5 @@ function arrayFunctions(req, res) {
         replaceResult,
         includesResult,
         indexOfResult
-    };
+    });
 }
