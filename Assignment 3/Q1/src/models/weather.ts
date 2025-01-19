@@ -10,6 +10,8 @@ class Weather extends Model {
     public time!: Date;
     public longitude!: number;
     public latitude!: number;
+    public createdAt!: Date;
+  public updatedAt!: Date;
 }
 
 Weather.init(

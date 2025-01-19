@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getWeatherDashboard = exports.getWeatherData = void 0;
+exports.getemailData = exports.getWeatherDashboard = exports.getWeatherData = void 0;
 const axios_1 = __importDefault(require("axios"));
 const sequelize_1 = require("sequelize");
 const weather_1 = __importDefault(require("../models/weather"));
 const config_1 = __importDefault(require("../db/config"));
+const email_1 = require("../email/email");
 const getWeatherData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const cities = data.cities;
@@ -122,3 +123,67 @@ const getWeatherDashboard = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.getWeatherDashboard = getWeatherDashboard;
+const getemailData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { city } = req.body;
+        if (!city) {
+            res.status(400).json({ error: 'City is required' });
+            return;
+        }
+        // Fetch data from the database
+        const weatherData = yield weather_1.default.findAll({
+            where: { city },
+            order: [['createdAt', 'DESC']]
+        });
+        if (weatherData.length === 0) {
+            res.status(404).json({ error: 'No data found for the specified city' });
+            return;
+        }
+        // Format the data into an HTML table
+        const emailContent = `
+        <html>
+        <body>
+            <table border="1">
+                <tr>
+                    <th>Id</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>CreatedAt</th>
+                    <th>UpdatedAt</th>
+                    <th>Weather</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                </tr>
+                ${weatherData.map(data => `
+                <tr>
+                    <td>${data.id}</td>
+                    <td>${data.city}</td>
+                    <td>${data.country}</td>
+                    <td>${data.updatedAt}</td>
+                    <td>${data.createdAt}</td>
+                    <td>${data.weather}</td>
+                    <td>${data.latitude}</td>
+                    <td>${data.longitude}</td>
+                </tr>
+                `).join('')}
+            </table>
+        </body>
+        </html>
+      `;
+        // Send the email
+        (0, email_1.sendWeatherEmail)(emailContent, (error, info) => {
+            if (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Failed to send email' });
+            }
+            else {
+                res.status(200).json({ message: 'Email sent successfully' });
+            }
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to send email' });
+    }
+});
+exports.getemailData = getemailData;
