@@ -38,7 +38,7 @@ export const getWeatherData = async (req: Request, res: Response) : Promise<void
                 // Ensure latitude and longitude are not null
                 if (latitude == null || longitude == null) {
                     console.error(`No valid latitude or longitude found for city: ${cityObj.city}`);
-                    continue; // Skip this city if geolocation is invalid
+                    continue; 
                 }
 
                 results.push({
@@ -179,7 +179,6 @@ export const getemailData = async (req: Request, res: Response): Promise<void> =
         </html>
       `;
   
-      // Send the email
       sendWeatherEmail(emailContent, (error: Error | null, info: any) => {
         if (error) {
           console.error(error);
