@@ -12,3 +12,11 @@ app.use("/",router)
 
 
 app.listen(PORT,()=>console.log("Server started"))
+
+sequelize.sync({ force: false })  // Set to true to force drop/recreate the table (only for development)
+  .then(() => {
+    console.log('Weather table created (if it did not exist)');
+  })
+  .catch((error) => {
+    console.error('Error creating weather table:', error);
+  });
