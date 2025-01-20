@@ -38,7 +38,7 @@ export const getWeatherData = async (req: Request, res: Response) : Promise<void
                 // Ensure latitude and longitude are not null
                 if (latitude == null || longitude == null) {
                     console.error(`No valid latitude or longitude found for city: ${cityObj.city}`);
-                    continue; 
+                    continue; +
                 }
 
                 results.push({
@@ -50,7 +50,7 @@ export const getWeatherData = async (req: Request, res: Response) : Promise<void
 
                 const resp = await axios.get("https://weatherapi-com.p.rapidapi.com/current.json", {
                     params: {
-                        q: `${locationData.latitude},${locationData.longitude}`
+                        q: `${locationData.latitude},${locationData.longitude}` //literal template
                     },
                     headers: {
                         'X-RapidAPI-Key': 'e07ffe2e60mshd846c724dd84142p1c08b7jsn1c2cb45b5fb6',

@@ -1,6 +1,6 @@
 import express from 'express';
 import sequelize from "./db/config"
-import bodyParser from "body-parser"
+import bodyParser from "body-parser"  //for passing data in payload
 import router from './routes/router';
 
 const app =express()

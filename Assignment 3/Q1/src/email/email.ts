@@ -6,7 +6,7 @@ export const sendWeatherEmail = async (content: string, p0: unknown) => {
         secure:true,
       auth: {
         user: 'sayalipr15@gmail.com',
-        pass: 'lirt czbx uvla clwp'
+        pass: 'put your password here',
       }
     });
     const mailOptions = {
