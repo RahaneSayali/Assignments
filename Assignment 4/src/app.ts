@@ -1,17 +1,18 @@
-import express,{Request , Response} from 'express'
-
+import express, { Request, Response, NextFunction } from "express";
+import authRoutes from "./routes/auth";
+import bodyParser from "body-parser";
+import "./models/associations";
 const app = express();
-const PORT=8000;
+const PORT = 8000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json());
+app.use("/auth", authRoutes);
 
 
-app.use((err: any, req: Request, res: Response) => {
-    console.error(err.stack);
-    res.status(500).send('Something went wrong!');
-  });
-  
-  // Start the server
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
