@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import authRoutes from "./routes/auth";
 import bodyParser from "body-parser";
 import "./models/associations";
+import { verifyAuth } from "./middlewares/authmiddleware";
 const app = express();
 const PORT = 8000;
 
