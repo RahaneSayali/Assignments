@@ -3,9 +3,10 @@ import sequelize from "../database/db";
 import { Organization } from "./Organisation";
 
 interface CustomerContent {
-  id:number;
+  id: number;
   email: string;
   msaValidFrom: Date;
+  organizationId: number;
   msaValidUpto: Date;
   legalName: string;
   ndaSignedOn: Date;
@@ -24,6 +25,7 @@ class Customer extends Model<CustomerContent> implements CustomerContent {
   public id!: number;
   public password!: string;
   public msaValidFrom!: Date;
+  public organizationId!: number;
   public msaValidUpto!: Date;
   public legalName!: string;
   public ndaSignedOn!: Date;
@@ -53,6 +55,10 @@ Customer.init(
     },
     msaValidFrom: {
       type: DataTypes.DATE,
+      allowNull: true,
+    },
+    organizationId: {
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     msaValidUpto: {
@@ -103,6 +109,7 @@ Customer.init(
   {
     sequelize,
     tableName: "customers",
+    underscored: true,
   }
 );
 

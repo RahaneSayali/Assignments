@@ -38,13 +38,13 @@ export const registerOrganization = async (orgData: any) => {
 };
 
 export const registerCustomer = async (custData: any) => {
-  const { email, password, OrganizationId, ...rest } = custData;
+  const { email, password, organizationId, ...rest } = custData;
 
   const hashedPassword = await hashPassword(password);
 
   const newCustomer = await Customer.create({
     email,
-    OrganizationId: OrganizationId,
+    organizationId: organizationId,
     ...rest,
     password: hashedPassword,
   });

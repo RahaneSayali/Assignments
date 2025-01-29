@@ -25,6 +25,10 @@ Customer.init({
         type: sequelize_1.DataTypes.DATE,
         allowNull: true,
     },
+    organizationId: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true,
+    },
     msaValidUpto: {
         type: sequelize_1.DataTypes.DATE,
         allowNull: true,
@@ -72,4 +76,5 @@ Customer.init({
 }, {
     sequelize: db_1.default,
     tableName: "customers",
+    underscored: true,
 });

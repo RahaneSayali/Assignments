@@ -55,9 +55,9 @@ const registerOrganization = (orgData) => __awaiter(void 0, void 0, void 0, func
 });
 exports.registerOrganization = registerOrganization;
 const registerCustomer = (custData) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password, OrganizationId } = custData, rest = __rest(custData, ["email", "password", "OrganizationId"]);
+    const { email, password, organizationId } = custData, rest = __rest(custData, ["email", "password", "organizationId"]);
     const hashedPassword = yield (0, exports.hashPassword)(password);
-    const newCustomer = yield Customer_1.Customer.create(Object.assign(Object.assign({ email, OrganizationId: OrganizationId }, rest), { password: hashedPassword }));
+    const newCustomer = yield Customer_1.Customer.create(Object.assign(Object.assign({ email, organizationId: organizationId }, rest), { password: hashedPassword }));
     return newCustomer;
 });
 exports.registerCustomer = registerCustomer;

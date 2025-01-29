@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+
 import { verifyToken } from "../service/authservice";
 
 export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {

@@ -1,11 +1,12 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
 import sequelize from "../database/db";
 import { Customer } from "./Customer";
+import { Organization } from "./Organisation";
 
 interface SOWContents {
-  id: number;
+  id?: number;
   InvoiceEmailAddresses: string[];
-  customerId: string;
+  customerId: number;
   customerPoNumber: string;
   title: string;
   customerSoWNumber: string;
@@ -13,12 +14,13 @@ interface SOWContents {
   ValidityUpto: Date;
   totalValue: number;
   currency: string;
+  description: string;
 }
 
 class SOW extends Model<SOWContents> implements SOWContents {
   public id!: number;
   public InvoiceEmailAddresses!: string[];
-  public customerId!: string;
+  public customerId!: number;
   public customerPoNumber!: string;
   public title!: string;
   public customerSoWNumber!: string;
@@ -26,13 +28,15 @@ class SOW extends Model<SOWContents> implements SOWContents {
   public ValidityUpto!: Date;
   public totalValue!: number;
   public currency!: string;
+  public description!: string;
 }
 
 SOW.init(
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
+      primaryKey: true,
     },
 
     InvoiceEmailAddresses: {
@@ -41,7 +45,7 @@ SOW.init(
     },
 
     customerId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
     },
@@ -72,6 +76,10 @@ SOW.init(
     currency: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

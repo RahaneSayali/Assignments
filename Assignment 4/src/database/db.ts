@@ -12,5 +12,5 @@ try {
   console.error("Unable to connect to the database:", err);
 }
 
-db.sync();
+db.sync({ alter: true });
 export default db;
