@@ -4,12 +4,12 @@ import { SOWPaymentPlan } from "./SOWpaymentplan";
 
 interface SOWPayLineItemContent {
   id?: number;
-  sowPaymentPlanId: string;
-  sowId: string;
+  sowPaymentPlanId: number;
+  sowId: number;
   orderId: string;
   particular: string;
   rate: number;
-  unit: String;
+  unit: string;
   total: number;
 }
 class SOWPaymentPlanItem
@@ -17,8 +17,8 @@ class SOWPaymentPlanItem
   implements SOWPayLineItemContent
 {
   public id!: number;
-  public sowPaymentPlanId!: string;
-  public sowId!: string;
+  public sowPaymentPlanId!: number;
+  public sowId!: number;
   public orderId!: string;
   public particular!: string;
   public rate!: number;
@@ -29,16 +29,16 @@ class SOWPaymentPlanItem
 SOWPaymentPlanItem.init(
   {
     id: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     sowPaymentPlanId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     sowId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     orderId: {
@@ -54,7 +54,7 @@ SOWPaymentPlanItem.init(
       allowNull: false,
     },
     unit: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     total: {
@@ -68,4 +68,4 @@ SOWPaymentPlanItem.init(
   }
 );
 
-export { SOWPayLineItemContent };
+export { SOWPaymentPlanItem };

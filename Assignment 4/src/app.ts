@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
 import authRoutes from "./routes/auth";
-("");
 import bodyParser from "body-parser";
 import "./models/associations";
 import sowRoutes from "./routes/sowRoutes";
@@ -16,8 +15,8 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 
 app.use("/api/sow", verifyAuth, sowRoutes);
+app.use("/api/reminders", verifyAuth, sowRoutes);
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

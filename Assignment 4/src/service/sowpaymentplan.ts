@@ -7,7 +7,6 @@ export const createSOWPaymentPlan = async (
   TotalActualAmount: number
 ) => {
   try {
-
     // Fetch the SOW by its ID (assuming the SOW model is set up and contains CustomerId)
     console.log("sowId passed:", sowId); // Check the value being passed
 

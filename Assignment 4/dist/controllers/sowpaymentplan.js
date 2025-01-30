@@ -9,30 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createPaymentPlan = void 0;
+exports.getPaymentPlanBySOWid = exports.createPaymentPlan = void 0;
+const SOWpaymentplan_1 = require("../models/SOWpaymentplan");
 const sowpaymentplan_1 = require("../service/sowpaymentplan");
 const createPaymentPlan = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { sowId } = req.params;
     const { plannedInvoiceDate, totalActualAmount } = req.body;
     try {
-        const parsedSowId = Number(sowId);
-        if (isNaN(parsedSowId) || parsedSowId <= 0) {
-            res.status(400).json({ message: "Invalid sowId provided" });
-            return;
-        }
-        // Validate totalActualAmount
-        if (isNaN(totalActualAmount) || totalActualAmount <= 0) {
-            res.status(400).json({ message: "Invalid Total Actual Amount provided" });
-            return;
-        }
-        if (isNaN(Date.parse(plannedInvoiceDate))) {
-            res
-                .status(400)
-                .json({ message: "Invalid Planned Invoice Date provided" });
-            return;
-        }
-        const paymentPlan = yield (0, sowpaymentplan_1.createSOWPaymentPlan)(parsedSowId, new Date(plannedInvoiceDate), // Ensure the date is properly formatted
-        totalActualAmount);
+        const paymentPlan = yield (0, sowpaymentplan_1.createSOWPaymentPlan)(Number(sowId), plannedInvoiceDate, totalActualAmount);
         res.status(201).json({
             message: "Payment plan created successfully!",
             data: paymentPlan,
@@ -48,3 +32,28 @@ const createPaymentPlan = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.createPaymentPlan = createPaymentPlan;
+const getPaymentPlanBySOWid = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { sowId } = req.params;
+    const parsedSowId = parseInt(sowId, 10);
+    if (isNaN(parsedSowId) || parsedSowId <= 0) {
+        res.status(400).json({ message: "Invalid SOW ID provided" });
+        return;
+    }
+    try {
+        const paymentPlans = yield SOWpaymentplan_1.SOWPaymentPlan.findAll({
+            where: { sowId: parsedSowId },
+        });
+        if (!paymentPlans || paymentPlans.length === 0) {
+            res.status(404).json({ message: "no payment plans for this sow id" });
+            return;
+        }
+        res.status(200).json({
+            message: "payment plans fetched successfully",
+            data: paymentPlans,
+        });
+    }
+    catch (error) {
+        res.status(500).json({ message: "error fetching payment plans", error });
+    }
+});
+exports.getPaymentPlanBySOWid = getPaymentPlanBySOWid;
