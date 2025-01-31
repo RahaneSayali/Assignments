@@ -11,11 +11,15 @@ interface SOWPayLineItemContent {
   rate: number;
   unit: string;
   total: number;
+  status: string;
 }
 class SOWPaymentPlanItem
   extends Model<SOWPayLineItemContent>
   implements SOWPayLineItemContent
 {
+  find(arg0: (item: any) => boolean) {
+    throw new Error("Method not implemented.");
+  }
   public id!: number;
   public sowPaymentPlanId!: number;
   public sowId!: number;
@@ -24,6 +28,7 @@ class SOWPaymentPlanItem
   public rate!: number;
   public unit!: string;
   public total!: number;
+  public status!: string;
 }
 
 SOWPaymentPlanItem.init(
@@ -60,6 +65,10 @@ SOWPaymentPlanItem.init(
     total: {
       type: DataTypes.FLOAT,
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

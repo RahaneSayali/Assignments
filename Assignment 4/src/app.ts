@@ -6,7 +6,7 @@ import sowRoutes from "./routes/sowRoutes";
 import { verifyAuth } from "./middlewares/authmiddleware";
 
 const app = express();
-const PORT = 8000;
+const PORT = 8001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

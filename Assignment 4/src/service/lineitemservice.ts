@@ -9,13 +9,14 @@ export const createLineItemService = async (
   particular: string,
   rate: number,
   unit: string,
-  total: number
+  total: number,
+  status: string
 ) => {
   try {
     console.log("Received sowPaymentPlanId:", sowPaymentPlanId);
 
     const sowPaymentPlan = await SOWPaymentPlan.findByPk(sowPaymentPlanId);
- 
+
     console.log("SOWPaymentPlan found:", sowPaymentPlan);
 
     if (!sowPaymentPlan) {
@@ -31,6 +32,7 @@ export const createLineItemService = async (
       rate,
       unit,
       total,
+      status,
     });
 
     return LineItem;

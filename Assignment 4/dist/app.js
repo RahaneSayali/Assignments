@@ -10,7 +10,7 @@ require("./models/associations");
 const sowRoutes_1 = __importDefault(require("./routes/sowRoutes"));
 const authmiddleware_1 = require("./middlewares/authmiddleware");
 const app = (0, express_1.default)();
-const PORT = 8000;
+const PORT = 8001;
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());

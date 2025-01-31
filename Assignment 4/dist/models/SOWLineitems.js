@@ -43,6 +43,10 @@ SOWPaymentPlanItem.init({
         type: sequelize_1.DataTypes.FLOAT,
         allowNull: false,
     },
+    status: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
 }, {
     sequelize: db_1.default,
     tableName: "sow_payment_plan_items",

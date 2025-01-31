@@ -15,6 +15,7 @@ router.post("/:sowId/PaymentPlan", sowpaymentplan_1.createPaymentPlan); //creati
 router.get("/:sowId/AllPaymentPlan", sowpaymentplan_1.getPaymentPlanBySOWid); //getting all
 router.post("/:sowId/LineItem", sowlineitems_1.createLineItem); //creating
 router.get("/:sowId/LineItem"); //getting
-router.post("/send-reminders", remainder_1.sendPaymentReminders);
-router.get("/customer/:customerId/sow-payment-plans", paymentplanforCustomer_1.getSOWPaymentPlans);
+router.post("/send-reminders", remainder_1.sendPaymentReminders); //checks due date and sends reminders
+router.get("/customer/:customerId/sow-payment-plans", paymentplanforCustomer_1.getSOWPaymentPlans); //client side
 exports.default = router;
+router.put("/customer/update-status/:sowPaymentPlanItemId", paymentplanforCustomer_1.updateInvoice);

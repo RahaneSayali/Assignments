@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createLineItemService = void 0;
 const SOWLineitems_1 = require("../models/SOWLineitems");
 const SOWpaymentplan_1 = require("../models/SOWpaymentplan");
-const createLineItemService = (sowPaymentPlanId, sowId, orderId, particular, rate, unit, total) => __awaiter(void 0, void 0, void 0, function* () {
+const createLineItemService = (sowPaymentPlanId, sowId, orderId, particular, rate, unit, total, status) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("Received sowPaymentPlanId:", sowPaymentPlanId);
         const sowPaymentPlan = yield SOWpaymentplan_1.SOWPaymentPlan.findByPk(sowPaymentPlanId);
@@ -29,6 +29,7 @@ const createLineItemService = (sowPaymentPlanId, sowId, orderId, particular, rat
             rate,
             unit,
             total,
+            status,
         });
         return LineItem;
     }

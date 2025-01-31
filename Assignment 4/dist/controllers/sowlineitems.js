@@ -13,14 +13,14 @@ exports.createLineItem = void 0;
 const lineitemservice_1 = require("../service/lineitemservice");
 const createLineItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { sowId } = req.params;
-    const { sowPaymentPlanId, orderId, particular, rate, unit, total } = req.body;
+    const { sowPaymentPlanId, orderId, particular, rate, unit, total, status } = req.body;
     try {
         if (isNaN(Number(sowId)) || Number(sowId) <= 0) {
             res.status(400).json({ message: "Invalid SOW ID provided" });
             return;
         }
         console.log("Received line item data:", req.body);
-        const lineItem = yield (0, lineitemservice_1.createLineItemService)(sowPaymentPlanId, Number(sowId), orderId, particular, rate, unit, total);
+        const lineItem = yield (0, lineitemservice_1.createLineItemService)(sowPaymentPlanId, Number(sowId), orderId, particular, rate, unit, total, status);
         res.status(201).json({
             message: "Line item created successfully",
             data: lineItem,

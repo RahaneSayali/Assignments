@@ -6,7 +6,8 @@ export const createLineItem = async (
   res: Response
 ): Promise<void> => {
   const { sowId } = req.params;
-  const { sowPaymentPlanId, orderId, particular, rate, unit, total } = req.body;
+  const { sowPaymentPlanId, orderId, particular, rate, unit, total, status } =
+    req.body;
 
   try {
     if (isNaN(Number(sowId)) || Number(sowId) <= 0) {
@@ -14,7 +15,7 @@ export const createLineItem = async (
       return;
     }
     console.log("Received line item data:", req.body);
-    
+
     const lineItem = await createLineItemService(
       sowPaymentPlanId,
       Number(sowId),
@@ -22,7 +23,8 @@ export const createLineItem = async (
       particular,
       rate,
       unit,
-      total
+      total,
+      status
     );
 
     res.status(201).json({
