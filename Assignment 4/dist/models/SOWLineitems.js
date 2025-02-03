@@ -7,6 +7,9 @@ exports.SOWPaymentPlanItem = void 0;
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../database/db"));
 class SOWPaymentPlanItem extends sequelize_1.Model {
+    find(arg0) {
+        throw new Error("Method not implemented.");
+    }
 }
 exports.SOWPaymentPlanItem = SOWPaymentPlanItem;
 SOWPaymentPlanItem.init({

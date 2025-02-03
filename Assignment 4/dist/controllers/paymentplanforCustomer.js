@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateInvoice = exports.getSOWPaymentPlans = void 0;
 const getpaymentplanCustomer_1 = require("../service/getpaymentplanCustomer");
+const Customer_1 = require("../models/Customer");
 const SOWLineitems_1 = require("../models/SOWLineitems");
 const SOWpaymentplan_1 = require("../models/SOWpaymentplan");
 const getSOWPaymentPlans = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,7 +40,7 @@ const updateInvoice = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 {
                     model: SOWpaymentplan_1.SOWPaymentPlan,
                     // : "sowPaymentPlan",
-                    //include: [{ model: Customer }],
+                    include: [{ model: Customer_1.Customer }],
                 },
             ],
         });
