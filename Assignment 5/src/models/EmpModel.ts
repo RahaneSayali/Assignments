@@ -2,7 +2,7 @@ import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/db";
 
 interface EmployeeAttributes {
-  id: string;
+  id?: number;
   name: string;
   email: string;
   password: string;
@@ -11,7 +11,7 @@ interface EmployeeAttributes {
 }
 
 class Employee extends Model<EmployeeAttributes> implements EmployeeAttributes {
-  public id!: string;
+  public id!: number;
   public name!: string;
   public email!: string;
   public password!: string;
@@ -23,6 +23,7 @@ Employee.init(
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       primaryKey: true,
     },
     name: {
@@ -47,6 +48,6 @@ Employee.init(
       allowNull: false,
     },
   },
-  { sequelize, tableName: "employee", timestamps: true }
+  { sequelize, modelName: "Employee", tableName: "employee", timestamps: true }
 );
 export default Employee;

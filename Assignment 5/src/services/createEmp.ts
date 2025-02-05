@@ -22,7 +22,6 @@ export const createEmployee = async (
 
   // Create a new employee
   const employee = await Employee.create({
-    id: uuidv4(),
     name,
     email,
     password: hashedPassword,

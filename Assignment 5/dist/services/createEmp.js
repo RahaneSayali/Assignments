@@ -16,7 +16,6 @@ exports.createEmployee = void 0;
 const EmpModel_1 = __importDefault(require("../models/EmpModel"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const error_1 = require("../utils/error"); // A custom error handler
-const uuid_1 = require("uuid");
 const createEmployee = (name, email, password, assignedShiftHours, role) => __awaiter(void 0, void 0, void 0, function* () {
     const existingEmployee = yield EmpModel_1.default.findOne({ where: { email } });
     if (existingEmployee) {
@@ -26,7 +25,6 @@ const createEmployee = (name, email, password, assignedShiftHours, role) => __aw
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
     // Create a new employee
     const employee = yield EmpModel_1.default.create({
-        id: (0, uuid_1.v4)(),
         name,
         email,
         password: hashedPassword,

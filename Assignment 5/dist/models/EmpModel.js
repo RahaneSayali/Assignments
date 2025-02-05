@@ -11,6 +11,7 @@ Employee.init({
     id: {
         type: sequelize_1.DataTypes.UUID,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
+        allowNull: false,
         primaryKey: true,
     },
     name: {
@@ -34,5 +35,5 @@ Employee.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-}, { sequelize: db_1.default, tableName: "employee", timestamps: true });
+}, { sequelize: db_1.default, modelName: "Employee", tableName: "employee", timestamps: true });
 exports.default = Employee;

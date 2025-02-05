@@ -3,11 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Timesheet = void 0;
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../config/db"));
-class Shift extends sequelize_1.Model {
+class Timesheet extends sequelize_1.Model {
 }
-Shift.init({
+exports.Timesheet = Timesheet;
+Timesheet.init({
     id: {
         type: sequelize_1.DataTypes.UUID,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
@@ -16,18 +18,30 @@ Shift.init({
     employeeId: {
         type: sequelize_1.DataTypes.UUID,
         allowNull: false,
-        references: { model: "employees", key: "id" },
     },
-    startTime: {
+    shiftId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+    },
+    projectName: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    taskName: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    fromDate: {
         type: sequelize_1.DataTypes.DATE,
         allowNull: false,
     },
-    endTime: {
+    toDate: {
         type: sequelize_1.DataTypes.DATE,
-        allowNull: true,
+        allowNull: false,
     },
-    actualHours: {
+    duration: {
         type: sequelize_1.DataTypes.FLOAT,
+        allowNull: false,
     },
-}, { sequelize: db_1.default, modelName: "shift" });
-exports.default = Shift;
+}, { sequelize: db_1.default, modelName: "Timesheet", tableName: "timesheets" });
+exports.default = Timesheet;

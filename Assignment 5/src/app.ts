@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import routes from "./routes/authroutes";
 import sequelize from "./config/db";
 import Employee from "./models/EmpModel";
+import defineAssociations from "./models/associations";
+defineAssociations();
 
 dotenv.config();
 
@@ -18,7 +20,7 @@ app.use("/api/auth", routes);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 sequelize
-  .sync({ alter: true }) 
+  .sync({ alter: true })
   .then(() => {
     console.log("Database synced successfully");
   })

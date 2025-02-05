@@ -1,32 +1,44 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
+import Employee from "../models/EmpModel";
 
 config();
 
 const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key";
 
 // Define a custom interface to extend Request
-interface AuthRequest extends Request {
-  employee?: any; // You can replace `any` with a proper Employee type
-}
+// interface Employe {
+//   id: string;
+//   role: string;
+// }
 
-export const authenticate = (req: AuthRequest, res: Response, next: NextFunction): void => {
+// export interface AuthRequest extends Request {
+//   employee?: Employe;
+// }
+
+export const authenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   const authHeader = req.header("Authorization");
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-     res.status(401).json({ error: "Unauthorized" });
-     return
+    res.status(401).json({ error: "Unauthorized" });
+    return;
   }
 
   const token = authHeader.replace("Bearer ", "").trim();
 
   try {
-    const decoded = jwt.verify(token, SECRET_KEY) as { id: string; role: string }; // Ensure correct typing
-    req.employee = decoded; 
-    next(); // Pass control to the next middleware
+    const decoded = jwt.verify(token, SECRET_KEY) as {
+      id: string;
+      role: string;
+    };
+    (req as any).employee = decoded;
+    next();
   } catch (error) {
-     res.status(401).json({ error: "Invalid token" });
-
+    res.status(401).json({ error: "Invalid token" });
   }
 };

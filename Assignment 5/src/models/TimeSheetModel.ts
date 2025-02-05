@@ -1,8 +1,35 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/db";
-class Shift extends Model {}
+import { v4 as uuidv4 } from "uuid";
+import Employee from "./EmpModel";
+import Shift from "./ShiftModel";
 
-Shift.init(
+export interface TimeSheetAttributes {
+  id?: string;
+  employeeId: string;
+  shiftId: string;
+  projectName: string;
+  taskName: string;
+  fromDate: Date;
+  toDate: Date;
+  duration: number;
+}
+
+export class Timesheet
+  extends Model<TimeSheetAttributes>
+  implements TimeSheetAttributes
+{
+  public id!: string;
+  public employeeId!: string;
+  public shiftId!: string;
+  public projectName!: string;
+  public taskName!: string;
+  public fromDate!: Date;
+  public toDate!: Date;
+  public duration!: number;
+}
+
+Timesheet.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -12,20 +39,33 @@ Shift.init(
     employeeId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: { model: "employees", key: "id" },
     },
-    startTime: {
+    shiftId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    projectName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    taskName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    fromDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    endTime: {
+    toDate: {
       type: DataTypes.DATE,
-      allowNull: true,
+      allowNull: false,
     },
-    actualHours: {
+    duration: {
       type: DataTypes.FLOAT,
+      allowNull: false,
     },
   },
-  { sequelize, modelName: "shift" }
+  { sequelize, modelName: "Timesheet", tableName: "timesheets" }
 );
-export default Shift;
+
+export default Timesheet;
