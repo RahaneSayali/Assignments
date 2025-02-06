@@ -7,16 +7,6 @@ config();
 
 const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key";
 
-// Define a custom interface to extend Request
-// interface Employe {
-//   id: string;
-//   role: string;
-// }
-
-// export interface AuthRequest extends Request {
-//   employee?: Employe;
-// }
-
 export const authenticate = (
   req: Request,
   res: Response,
