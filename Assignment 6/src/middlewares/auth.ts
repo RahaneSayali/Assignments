@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 
 config();
-const SECRET_KEY = "pacman";
+const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key";
 
 interface AuthRequest extends Request {
   user?: { id: string; role: "admin" | "user" };
