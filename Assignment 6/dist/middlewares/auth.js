@@ -36,11 +36,10 @@ exports.authorizeAdmin = authorizeAdmin;
 const authorizeUser = (req, res, next) => {
     var _a;
     if (((_a = req.user) === null || _a === void 0 ? void 0 : _a.role) !== "user") {
-        res.status(403).json({
+        return res.status(403).json({
             error: "Access denied Users only",
         });
-        return;
+        next();
     }
-    next();
 };
 exports.authorizeUser = authorizeUser;

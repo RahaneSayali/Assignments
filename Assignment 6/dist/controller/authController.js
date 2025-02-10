@@ -36,9 +36,9 @@ const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.userLogin = userLogin;
 const adminReg = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
     try {
-        const result = yield (0, adminService_1.regAdmin)(name, email, password);
+        const result = yield (0, adminService_1.regAdmin)(name, email, password, role);
         res.status(201).json(result);
     }
     catch (error) {

@@ -10,14 +10,23 @@ const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key";
 export const regUser = async (
   name: string,
   email: string,
-  password: string
+  password: string,
 ) => {
   try {
+    const existingUser = await User.findOne({ where: { email } });
+
+    if (existingUser) {
+      return {
+        error: "User with this email already exists",
+      };
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       name,
       email,
       password: hashedPassword,
+      
     });
 
     const token = jwt.sign(

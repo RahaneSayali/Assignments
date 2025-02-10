@@ -50,12 +50,11 @@ export const authorizeUser = (
   req: AuthRequest,
   res: Response,
   next: NextFunction
-): void => {
+): void | Response<any, Record<string, any>> => {
   if (req.user?.role !== "user") {
-    res.status(403).json({
+    return res.status(403).json({
       error: "Access denied Users only",
     });
-    return;
+    next();
   }
-  next();
 };

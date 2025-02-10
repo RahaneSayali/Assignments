@@ -10,15 +10,26 @@ const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key";
 export const regAdmin = async (
   name: string,
   email: string,
-  password: string
+  password: string,
+  role: string
 ) => {
   try {
+    const existingAdmin = await Admin.findOne({
+      where: { email, role: "admin" },
+    });
+
+    if (existingAdmin) {
+      return {
+        error: "User with this email already exists",
+      };
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newAdmin = await Admin.create({
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     const token = jwt.sign(

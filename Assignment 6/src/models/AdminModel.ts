@@ -7,6 +7,7 @@ interface AdminAtrritutes {
   name: string;
   email: string;
   password: string;
+  role: string;
 }
 
 interface AdminCreationAtrri extends Optional<AdminAtrritutes, "id"> {}
@@ -19,6 +20,7 @@ class Admin
   name!: string;
   email!: string;
   password!: string;
+  role!: string;
 }
 
 Admin.init(
@@ -40,6 +42,10 @@ Admin.init(
       unique: true,
     },
     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    role: {
       type: DataTypes.STRING,
       allowNull: false,
     },

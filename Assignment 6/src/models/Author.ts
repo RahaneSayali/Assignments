@@ -7,7 +7,6 @@ interface AuthorAttributes {
   name: string;
   bio?: string;
   birthdate?: Date;
-  isSystemUser: boolean;
 }
 
 interface AuthorCreationAttributes
@@ -21,7 +20,6 @@ class Author
   public name!: string;
   public bio?: string;
   public birthdate?: Date;
-  public isSystemUser!: boolean;
 }
 Author.init(
   {
@@ -42,11 +40,6 @@ Author.init(
     birthdate: {
       type: DataTypes.DATE,
       allowNull: true,
-    },
-    isSystemUser: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
     },
   },
   {

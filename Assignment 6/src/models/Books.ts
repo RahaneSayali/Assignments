@@ -5,6 +5,7 @@ interface BookAttributes {
   id: string;
   bookCode: string;
   title: string;
+  author: string;
   description?: string;
   publishedYear: number;
   price: number;
@@ -21,6 +22,7 @@ class Book
   public id!: string;
   public bookCode!: string;
   public title!: string;
+  public author!: string;
   public description?: string;
   public publishedYear!: number;
   public price!: number;
@@ -35,12 +37,16 @@ Book.init(
       allowNull: false,
     },
     bookCode: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
 
     title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    author: {
       type: DataTypes.STRING,
       allowNull: false,
     },

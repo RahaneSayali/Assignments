@@ -19,13 +19,22 @@ const AdminModel_1 = __importDefault(require("../models/AdminModel"));
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
 const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key";
-const regAdmin = (name, email, password) => __awaiter(void 0, void 0, void 0, function* () {
+const regAdmin = (name, email, password, role) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const existingAdmin = yield AdminModel_1.default.findOne({
+            where: { email, role: "admin" },
+        });
+        if (existingAdmin) {
+            return {
+                error: "User with this email already exists",
+            };
+        }
         const hashedPassword = yield bcrypt_1.default.hash(password, 10);
         const newAdmin = yield AdminModel_1.default.create({
             name,
             email,
             password: hashedPassword,
+            role,
         });
         const token = jsonwebtoken_1.default.sign({
             userId: newAdmin.id,

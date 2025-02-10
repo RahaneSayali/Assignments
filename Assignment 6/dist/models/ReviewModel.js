@@ -5,49 +5,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../config/db"));
-class Book extends sequelize_1.Model {
+class Review extends sequelize_1.Model {
 }
-Book.init({
+Review.init({
     id: {
         type: sequelize_1.DataTypes.UUID,
         defaultValue: sequelize_1.DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false,
     },
-    bookCode: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    title: {
-        type: sequelize_1.DataTypes.STRING,
+    userId: {
+        type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    author: {
-        type: sequelize_1.DataTypes.STRING,
+    bookId: {
+        type: sequelize_1.DataTypes.UUID,
         allowNull: false,
     },
-    description: {
+    content: {
         type: sequelize_1.DataTypes.TEXT,
-        allowNull: true,
-    },
-    publishedYear: {
-        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
-    },
-    price: {
-        type: sequelize_1.DataTypes.FLOAT,
-        allowNull: false,
-    },
-    externalId: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: true,
-        unique: true,
     },
 }, {
     sequelize: db_1.default,
-    modelName: "Book",
-    tableName: "Books",
+    modelName: "Review",
+    tableName: "Reviews",
     timestamps: true,
 });
-exports.default = Book;
+exports.default = Review;

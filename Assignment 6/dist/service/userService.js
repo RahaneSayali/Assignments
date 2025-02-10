@@ -21,6 +21,12 @@ dotenv_1.default.config();
 const SECRET_KEY = process.env.JWT_SECRET || "your-secret-key";
 const regUser = (name, email, password) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const existingUser = yield UserModel_1.default.findOne({ where: { email } });
+        if (existingUser) {
+            return {
+                error: "User with this email already exists",
+            };
+        }
         const hashedPassword = yield bcrypt_1.default.hash(password, 10);
         const newUser = yield UserModel_1.default.create({
             name,

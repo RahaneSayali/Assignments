@@ -25,10 +25,10 @@ export const userLogin = async (req: Request, res: Response) => {
 };
 
 export const adminReg = async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,role } = req.body;
 
   try {
-    const result = await regAdmin(name, email, password);
+    const result = await regAdmin(name, email, password,role);
     res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ error: error });
