@@ -34,6 +34,8 @@ const fetchBookFromExternalAPI = (title) => __awaiter(void 0, void 0, void 0, fu
                 description: book.description || "No description available",
                 publishedDate: book.publishedDate || "Unknown",
                 thumbnail: ((_a = book.imageLinks) === null || _a === void 0 ? void 0 : _a.thumbnail) || null,
+                averageRating: book.averageRating || "No rating available",
+                ratingsCount: book.ratingsCount || 0,
             };
         }
         else {

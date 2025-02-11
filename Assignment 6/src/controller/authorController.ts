@@ -39,3 +39,44 @@ export const fetchAuthorById = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const updateAuthorController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const { name, bio, birthdate } = req.body;
+
+    const updatedAuthor = await authorService.updateAuthor(id, {
+      name,
+      bio,
+      birthdate,
+    });
+    if (updatedAuthor) {
+      res.status(200).json(updatedAuthor);
+    } else {
+      res.status(404).json({ message: "Author not found" });
+    }
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: "failed to update the author" + error.message });
+  }
+};
+
+export const deleteAuthorController = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const deletedAuthor = await authorService.deleteAuthor(id);
+    if (deletedAuthor) {
+      res
+        .status(200)
+        .json({ message: "book deleted succefully", deletedAuthor });
+    } else {
+      res.status(404).json({ message: "book not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "failed to delete book " });
+  }
+};

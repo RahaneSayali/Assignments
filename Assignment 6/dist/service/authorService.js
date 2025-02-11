@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAuthor = exports.createAuthor = exports.getAuthors = void 0;
+exports.deleteAuthor = exports.updateAuthor = exports.getAuthor = exports.createAuthor = exports.getAuthors = void 0;
 const Author_1 = __importDefault(require("../models/Author"));
 const getAuthors = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -43,3 +43,31 @@ const getAuthor = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getAuthor = getAuthor;
+const updateAuthor = (id, updateData) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const author = yield Author_1.default.findByPk(id);
+        if (!author) {
+            return null;
+        }
+        const updatedAuthor = yield author.update(updateData);
+        return updatedAuthor;
+    }
+    catch (error) {
+        throw new Error("Failed to update author" + error);
+    }
+});
+exports.updateAuthor = updateAuthor;
+const deleteAuthor = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const author = yield Author_1.default.findByPk(id);
+        if (!author) {
+            return null;
+        }
+        yield author.destroy();
+        return author;
+    }
+    catch (error) {
+        throw new Error("Failed to delete author" + error);
+    }
+});
+exports.deleteAuthor = deleteAuthor;

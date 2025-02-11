@@ -21,6 +21,8 @@ export const fetchBookFromExternalAPI = async (title: string) => {
         description: book.description || "No description available",
         publishedDate: book.publishedDate || "Unknown",
         thumbnail: book.imageLinks?.thumbnail || null,
+        averageRating: book.averageRating || "No rating available",
+        ratingsCount: book.ratingsCount || 0,
       };
     } else {
       return null;

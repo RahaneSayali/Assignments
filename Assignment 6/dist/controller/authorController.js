@@ -42,7 +42,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchAuthorById = exports.addAuthor = exports.getAllAuthors = void 0;
+exports.deleteAuthorController = exports.updateAuthorController = exports.fetchAuthorById = exports.addAuthor = exports.getAllAuthors = void 0;
 const authorService = __importStar(require("../service/authorService"));
 const authorService_1 = require("../service/authorService");
 const getAllAuthors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -85,3 +85,44 @@ const fetchAuthorById = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.fetchAuthorById = fetchAuthorById;
+const updateAuthorController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { name, bio, birthdate } = req.body;
+        const updatedAuthor = yield authorService.updateAuthor(id, {
+            name,
+            bio,
+            birthdate,
+        });
+        if (updatedAuthor) {
+            res.status(200).json(updatedAuthor);
+        }
+        else {
+            res.status(404).json({ message: "Author not found" });
+        }
+    }
+    catch (error) {
+        res
+            .status(500)
+            .json({ message: "failed to update the author" + error.message });
+    }
+});
+exports.updateAuthorController = updateAuthorController;
+const deleteAuthorController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const deletedAuthor = yield authorService.deleteAuthor(id);
+        if (deletedAuthor) {
+            res
+                .status(200)
+                .json({ message: "book deleted succefully", deletedAuthor });
+        }
+        else {
+            res.status(404).json({ message: "book not found" });
+        }
+    }
+    catch (error) {
+        res.status(500).json({ error: "failed to delete book " });
+    }
+});
+exports.deleteAuthorController = deleteAuthorController;

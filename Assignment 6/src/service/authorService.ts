@@ -29,3 +29,29 @@ export const getAuthor = async (id: string) => {
     throw new Error("Failed to fetch author" + error);
   }
 };
+
+export const updateAuthor = async (id: string, updateData: any) => {
+  try {
+    const author = await Author.findByPk(id);
+    if (!author) {
+      return null;
+    }
+    const updatedAuthor = await author.update(updateData);
+    return updatedAuthor;
+  } catch (error) {
+    throw new Error("Failed to update author" + error);
+  }
+};
+
+export const deleteAuthor = async (id: string) => {
+  try {
+    const author = await Author.findByPk(id);
+    if (!author) {
+      return null;
+    }
+    await author.destroy();
+    return author;
+  } catch (error) {
+    throw new Error("Failed to delete author" + error);
+  }
+};

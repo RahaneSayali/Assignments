@@ -9,5 +9,5 @@ exports.authorRouter = authorRouter;
 authorRouter.get("/", auth_1.authenticate, authorController_1.getAllAuthors); //get all authors
 authorRouter.get("/:id", authorController_1.fetchAuthorById); //get author by id
 authorRouter.post("/", auth_1.authenticate, auth_1.authorizeAdmin, authorController_1.addAuthor); //create new author
-authorRouter.put("/:id"); //update author by id
-authorRouter.delete("/:id"); //delete author by id
+authorRouter.put("/:id", auth_1.authenticate, auth_1.authorizeAdmin, authorController_1.updateAuthorController); //update author by id
+authorRouter.delete("/:id", auth_1.authenticate, auth_1.authorizeAdmin, authorController_1.deleteAuthorController); //delete author by id
