@@ -11,3 +11,4 @@ authorRouter.get("/:id", authorController_1.fetchAuthorById); //get author by id
 authorRouter.post("/", auth_1.authenticate, auth_1.authorizeAdmin, authorController_1.addAuthor); //create new author
 authorRouter.put("/:id", auth_1.authenticate, auth_1.authorizeAdmin, authorController_1.updateAuthorController); //update author by id
 authorRouter.delete("/:id", auth_1.authenticate, auth_1.authorizeAdmin, authorController_1.deleteAuthorController); //delete author by id
+//# sourceMappingURL=authorRoutes.js.map

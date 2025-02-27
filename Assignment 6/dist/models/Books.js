@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const db_1 = __importDefault(require("../config/db"));
+const pgdatabase_1 = __importDefault(require("../config/pgdatabase"));
 class Book extends sequelize_1.Model {
 }
 Book.init({
@@ -14,10 +14,13 @@ Book.init({
         primaryKey: true,
         allowNull: false,
     },
+    uId: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
     bookCode: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true,
     },
     title: {
         type: sequelize_1.DataTypes.STRING,
@@ -42,12 +45,28 @@ Book.init({
     externalId: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
-        unique: true,
+        unique: false,
+    },
+    version: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+    },
+    isActive: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+    },
+    archived: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
     },
 }, {
-    sequelize: db_1.default,
+    sequelize: pgdatabase_1.default,
     modelName: "Book",
     tableName: "Books",
     timestamps: true,
 });
 exports.default = Book;
+//# sourceMappingURL=Books.js.map

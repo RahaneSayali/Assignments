@@ -11,4 +11,5 @@ const reviewRouter = express_1.default.Router();
 exports.reviewRouter = reviewRouter;
 reviewRouter.get("/:bookId/reviews", auth_1.authenticate, reviewController_1.getReviews); //get review by book id
 reviewRouter.post("/:bookId/reviews", auth_1.authenticate, reviewController_1.createReview); //create review
-reviewRouter.delete("/reviews/:id"); //delete review
+reviewRouter.delete("/:bookId/reviews"); //delete review
+//# sourceMappingURL=reviewRoutes.js.map

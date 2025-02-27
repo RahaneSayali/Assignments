@@ -10,3 +10,4 @@ authRouter.post("/user/register", authController_1.userReg);
 authRouter.post("/user/login", auth_1.authenticate, authController_1.userLogin);
 authRouter.post("/admin/register", authController_1.adminReg);
 authRouter.post("/admin/login", auth_1.authenticate, authController_1.adminLogin);
+//# sourceMappingURL=authRoutes.js.map

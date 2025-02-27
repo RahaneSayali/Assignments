@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 
-import sequelize from "../config/db";
+import sequelize from "../config/pgdatabase";
 
 interface UserAtrritutes {
   id: string;

@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const db_1 = __importDefault(require("../config/db"));
+const pgdatabase_1 = __importDefault(require("../config/pgdatabase"));
 class Rating extends sequelize_1.Model {
 }
 Rating.init({
@@ -31,9 +31,10 @@ Rating.init({
         },
     },
 }, {
-    sequelize: db_1.default,
+    sequelize: pgdatabase_1.default,
     modelName: "Rating",
     tableName: "Ratings",
     timestamps: true,
 });
 exports.default = Rating;
+//# sourceMappingURL=RatingModel.js.map

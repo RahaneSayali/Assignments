@@ -126,3 +126,4 @@ const deleteAuthorController = (req, res) => __awaiter(void 0, void 0, void 0, f
     }
 });
 exports.deleteAuthorController = deleteAuthorController;
+//# sourceMappingURL=authorController.js.map

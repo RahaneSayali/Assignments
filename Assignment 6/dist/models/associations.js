@@ -16,3 +16,4 @@ ReviewModel_1.default.belongsTo(UserModel_1.default, { foreignKey: "userId" });
 // A Book has many reviews, with a foreign key `bookId`
 Books_1.default.hasMany(ReviewModel_1.default, { foreignKey: "bookId", onDelete: "CASCADE" });
 ReviewModel_1.default.belongsTo(Books_1.default, { foreignKey: "bookId" });
+//# sourceMappingURL=associations.js.map

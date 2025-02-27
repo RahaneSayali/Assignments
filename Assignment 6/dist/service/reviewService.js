@@ -47,3 +47,25 @@ const getReviewsByBookId = (bookId) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.getReviewsByBookId = getReviewsByBookId;
+// export const deleteReviewById = async (reviewId: string, userId: string) => {
+//   try {
+//     // Fetch the review to check if the user is the owner or admin
+//     const review = await Review.findByPk(reviewId, {
+//       include: [{ model: User, attributes: ["id"] }], // Include the user who created the review
+//     });
+//     if (!review) {
+//       throw new Error("Review not found");
+//     }
+//     // Check if the user is the author or an admin
+//     if (review.userId === userId || (req as any).user.role === "admin") {
+//       // Proceed to delete the review
+//       await review.destroy();
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   } catch (error) {
+//     throw new Error("Failed to delete review: " + error);
+//   }
+// };
+//# sourceMappingURL=reviewService.js.map

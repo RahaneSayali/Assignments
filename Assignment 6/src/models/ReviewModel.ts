@@ -1,6 +1,5 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../config/db";
-
+import sequelize from "../config/pgdatabase";
 
 interface ReviewAttributes {
   id: string;
@@ -11,7 +10,10 @@ interface ReviewAttributes {
 
 interface ReviewCreationAttributes extends Optional<ReviewAttributes, "id"> {}
 
-class Review extends Model<ReviewAttributes, ReviewCreationAttributes> implements ReviewAttributes {
+class Review
+  extends Model<ReviewAttributes, ReviewCreationAttributes>
+  implements ReviewAttributes
+{
   public id!: string;
   public userId!: string;
   public bookId!: string;
@@ -46,6 +48,5 @@ Review.init(
     timestamps: true,
   }
 );
-
 
 export default Review;

@@ -81,3 +81,19 @@ const getReviews = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getReviews = getReviews;
+// export const deleteReview = async (req: Request, res: Response) => {
+//     try {
+//       const { reviewId } = req.params;
+//       const userId = (req as any).user.id; // Assuming you set the user ID in the request after authentication
+//       // Call the service to delete the review
+//       const result = await deleteReviewById(reviewId, userId);
+//       if (result) {
+//         res.json({ message: "Review deleted successfully" });
+//       } else {
+//         res.status(403).json({ error: "You are not authorized to delete this review" });
+//       }
+//     } catch (error: any) {
+//       res.status(500).json({ error: error.message });
+//     }
+//   };
+//# sourceMappingURL=reviewController.js.map

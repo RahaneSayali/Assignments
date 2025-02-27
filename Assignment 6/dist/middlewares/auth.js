@@ -43,3 +43,4 @@ const authorizeUser = (req, res, next) => {
     }
 };
 exports.authorizeUser = authorizeUser;
+//# sourceMappingURL=auth.js.map
